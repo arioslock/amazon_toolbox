@@ -59,14 +59,40 @@ class PriceCalculator:
             If not, return object with all price component and message with diffrence bettwen price and final price.
         """
 
-        vat = price_payload.net_product_price * (price_payload.vat*(1/1/(1+price_payload.vat)))
+        vat = price_payload.calculated_price * (price_payload.vat*(1/1/(1+price_payload.vat)))
+        price_payload.calculated_vat = price_payload.calculated_price * (price_payload.vat*(1/1/(1+price_payload.vat)))
+        print(f""" VAT
+            vat:{vat}
+            price_payload.calculated_vat :{price_payload.calculated_vat}
+                """)
         amz_fee = price_payload.calculated_price * price_payload.amz_fee
-        margin = price_payload.calculated_price * price_payload.margin
+        price_payload.calculated_amz_fee = price_payload.calculated_price * price_payload.amz_fee
+        print(f""" amz_fee
+            amz_fee:{amz_fee}
+            pprice_payload.calculated_amz_fee :{price_payload.calculated_amz_fee}
+                """)        
+        margin = price_payload.net_product_price * price_payload.margin
+        price_payload.calculated_margin = price_payload.net_product_price * price_payload.margin
+        print(f""" margin
+            margin:{margin}
+            price_payload.calculated_margin :{price_payload.calculated_margin}
+                """)  
         extra_perc_from_selling_price = price_payload.calculated_price * price_payload.extra_perc_from_selling_price
+        price_payload.calculated_extra_perc_from_selling_price = price_payload.calculated_price * price_payload.extra_perc_from_selling_price
+        print(f""" extra_perc_from_selling_price
+            extra_perc_from_selling_price:{extra_perc_from_selling_price}
+            price_payload.calculated_extra_perc_from_selling_price :{price_payload.calculated_extra_perc_from_selling_price}
+                """)  
         price_check = price_payload.calculated_price - amz_fee - price_payload.fixed_costs - extra_perc_from_selling_price - vat - margin - price_payload.net_delivery_cost
+        price_payload.price_check = price_payload.calculated_price - price_payload.calculated_vat - price_payload.calculated_amz_fee - price_payload.fixed_costs - price_payload.calculated_margin - price_payload.calculated_extra_perc_from_selling_price - price_payload.net_delivery_cost
         price_components = pp.PricePayload(net_product_price=price_check, vat=vat, amz_fee=amz_fee, fixed_costs=price_payload.fixed_costs, 
                                           margin=margin, extra_perc_from_selling_price=extra_perc_from_selling_price, net_delivery_cost=price_payload.net_delivery_cost)
-        if price_check == price_payload.net_product_price: 
+        print(price_payload.calculated_price)
+        print(price_check)
+        print(price_payload.price_check)
+
+        if -0.1 < (price_payload.net_product_price - price_payload.price_check) < 0.1: 
+            print("Price calculated correctly")
             return price_components
         else:
             print(f"""Price miss calculation.
