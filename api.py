@@ -2,7 +2,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-# Żeby zobaczyć co jest na stronie w cmd
+# To view what's on the Flask site, run the following command in CMD:
 # $env:FLASK_APP = "api.py"
 # $env:FLASK_ENV = "development"
 # flask run

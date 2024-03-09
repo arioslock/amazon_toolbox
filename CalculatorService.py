@@ -25,14 +25,14 @@ class PriceCalculator:
         """
 
         net_price = ((price_payload.net_product_price * (1 + price_payload.margin)) + price_payload.fixed_costs + price_payload.net_delivery_cost) 
-        magic_numebr = (price_payload.vat*(1/1/(1+price_payload.vat))) + price_payload.amz_fee + price_payload.extra_perc_from_selling_price
-        calculated_price = net_price/(1-magic_numebr)
+        perc_price_substraction = (price_payload.vat*(1/1/(1+price_payload.vat))) + price_payload.amz_fee + price_payload.extra_perc_from_selling_price
+        calculated_price = net_price/(1-perc_price_substraction)
 
         price_payload.calculated_price = calculated_price
 
-        return 
+        return None
     
-    def check_price (price_payload: pp.PricePayload):
+    def is_price_calculated_correctly (price_payload: pp.PricePayload):
         """
         This function takes a PricePayload object to calculate price components and checks if the difference between the net product price and the price check is in the range of (-0.1 to 0.1).
 
@@ -52,10 +52,7 @@ class PriceCalculator:
         price_payload.price_check = price_payload.calculated_price - price_payload.calculated_vat - price_payload.calculated_amz_fee - price_payload.fixed_costs - price_payload.calculated_margin - price_payload.calculated_extra_perc_from_selling_price - price_payload.net_delivery_cost
 
         if -0.1 < (price_payload.net_product_price - price_payload.price_check) < 0.1: 
-            print("Price calculated correctly")
-            return
+            price_payload.price_calculated_corretly = True
+            return True
         else:
-            print(f"""Price miss calculation
-                  net price = {price_payload.net_product_price} 
-                  price check = {price_payload.net_product_price - price_payload.price_check}""")
-            return
+            return False

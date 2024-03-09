@@ -13,6 +13,6 @@ calculator.calculate_price(product_1)
 
 print(vars(product_1))
 
-calculator.check_price(product_1)
+print(calculator.is_price_calculated_correctly(product_1))
 
 print(vars(product_1))

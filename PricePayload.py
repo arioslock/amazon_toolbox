@@ -19,6 +19,7 @@ class PricePayload:
     calculated_margin = 0
     calculated_extra_perc_from_selling_price = 0
     price_check = 0
+    price_calculated_corretly = False
 
     def __init__(self, net_product_price: int, vat: int, amz_fee: int, fixed_costs: int, margin: int, 
                  extra_perc_from_selling_price: int, net_delivery_cost: int) -> None:
