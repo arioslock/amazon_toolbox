@@ -29,8 +29,6 @@ class PriceCalculator:
         calculated_price = net_price/(1-perc_price_substraction)
 
         price_payload.calculated_price = calculated_price
-
-        return None
     
     def is_price_calculated_correctly (price_payload: pp.PricePayload):
         """
@@ -51,8 +49,5 @@ class PriceCalculator:
         price_payload.calculated_extra_perc_from_selling_price = price_payload.calculated_price * price_payload.extra_perc_from_selling_price
         price_payload.price_check = price_payload.calculated_price - price_payload.calculated_vat - price_payload.calculated_amz_fee - price_payload.fixed_costs - price_payload.calculated_margin - price_payload.calculated_extra_perc_from_selling_price - price_payload.net_delivery_cost
 
-        if -0.1 < (price_payload.net_product_price - price_payload.price_check) < 0.1: 
-            price_payload.price_calculated_corretly = True
-            return True
-        else:
-            return False
+        price_payload.price_calculated_corretly = (-0.1 < (price_payload.net_product_price - price_payload.price_check) < 0.1)
+        return price_payload.price_calculated_corretly
