@@ -1,0 +1,83 @@
+{% extends "base.html" %} 
+{% block title %}Calculator{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <h3 align="center">Calculate FBM price</h3>
+    <label for="net_product_price" style="margin-bottom: 0px; margin-top: 5px;">Net product price</label>
+    <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        id="net_product_price"
+        name="net_product_price"
+        style="width: 15%; margin-bottom: 0px; margin-top: 0px;"
+        placeholder="Net product price"
+    />
+    <label for="vat" style="margin-bottom: 0px; margin-top: 5px;">VAT</label>
+    <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        id="vat"
+        name="vat"
+        style="width: 15%; margin-bottom: 0px; margin-top: 0px;"
+        placeholder="VAT"
+    />
+    <label for="amazon_fee" style="margin-bottom: 0px; margin-top: 5px;">Amazon FEE %</label>
+    <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        id="amazon_fee"
+        name="amazon_fee"
+        style="width: 15%; margin-bottom: 0px; margin-top: 0px;"
+        placeholder="Amazon FEE %"
+    />
+    <label for="fixed_costs" style="margin-bottom: 0px; margin-top: 5px;">Fixed costs</label>
+    <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        id="fixed_costs"
+        name="fixed_costs"
+        style="width: 15%; margin-bottom: 0px; margin-top: 0px;"
+        placeholder="Fixed costs"
+    />
+    <label for="margin" style="margin-bottom: 0px; margin-top: 5px;">Margin</label>
+    <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        id="margin"
+        name="margin"
+        style="width: 15%; margin-bottom: 0px; margin-top: 0px;"
+        placeholder="Margin"
+    />
+    <label for="extra_perc_from_selling_price" style="margin-bottom: 0px; margin-top: 5px;">Extra percent from selling</label>
+    <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        id="extra_perc_from_selling_price"
+        name="extra_perc_from_selling_price"
+        style="width: 15%; margin-bottom: 0px; margin-top: 0px;"
+        placeholder="Extra percent from selling"
+    />
+    <label for="net_delivery_cost" style="margin-bottom: 0px; margin-top: 5px;">Net delivery cost</label>
+    <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        id="net_delivery_cost"
+        name="net_delivery_cost"
+        style="width: 15%; margin-bottom: 0px; margin-top: 0px;"
+        placeholder="Net delivery cost"
+    />
+    <br />
+    <div style="text-align: center; margin-top: 20px;"> <!-- Center aligns the button -->
+        <button type="submit" class="btn btn-primary">Calculate</button>
+    </div>
+</form>
+
+{% endblock %}
